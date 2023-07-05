@@ -39,8 +39,8 @@
             <a class="nav-link" href="#Goals">Goals</a>
             <a class="nav-link" href="#About us">About us</a>
             <span><div class="container">
-            <button type="button" class="btn btn-danger">Log in</button>
-            <button type="button" class="btn btn-sm btn-outline-danger">Sign up</button>
+            <button type="button" class="btn btn-danger"   onclick="window.open('/Log in')">Log in</button>
+            <button type="button" class="btn btn-sm btn-outline-danger" onclick="window.open('/Sign up')">Sign up</button>
             </div></span>
       </div>
    </nav>
@@ -51,8 +51,8 @@
     <h1><span style="color: #dc3545">Play</span>Social</h1>
     <hr>
     <div class="d-grid gap-2 col-4">
-    <button class="btn btn-primary btn-lg btn-danger" type="button">Log in</button>
-    <button class="btn btn-lg btn-outline-danger" type="button">Sign up</button>
+    <button class="btn btn-primary btn-lg btn-danger" type="button"  onclick="window.open('/Log in')">Log in</button>
+    <button class="btn btn-lg btn-outline-danger" type="button" onclick="window.open('/Sign up')">Sign up</button>
     </div>
   </div>
 <br>
@@ -62,12 +62,11 @@
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col">
       <div class="card text-center custom-rounded h-100">
-        {{-- <img src="..." class="card-img-top" alt="..."> --}}
         <div class="card-body text-white bg-danger custom-rounded-top">
           <h5 class="card-title">Free plan</h5>
           <hr>
           <p class="card-text">5 minutes max video time limit.<br>100 videos max upload.<br>70 to 30 spilt in monetization between creator and platform.</p>
-          <a href="#" class="btn btn-light">Sign up</a>
+          <a href="/Sign up" class="btn btn-light">Sign up</a>
         </div>
         <div class="card-footer">
           <small class="text-muted">Free</small>
@@ -76,7 +75,6 @@
     </div>
     <div class="col">
       <div class="card text-center custom-rounded h-100">
-        {{-- <img src="..." class="card-img-top" alt="..."> --}}
         <div class="card-body text-white bg-danger custom-rounded-top">
           <h5 class="card-title">beginner plan</h5>
           <hr>
