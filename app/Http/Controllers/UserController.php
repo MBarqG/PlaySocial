@@ -29,7 +29,8 @@ class UserController extends Controller
         
         auth()->login($user);
 
-        return redirect('/')->with('message', 'User created and logged in');
+        $profileLink = "dashboard";
+        return redirect($profileLink)->with('message', 'User created and logged in');
     }
 
     // Logout User

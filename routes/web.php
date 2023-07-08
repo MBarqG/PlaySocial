@@ -22,16 +22,16 @@ Route::get('/', function () {
 
 
 // Sign up
-Route::get('/Sign up',[UserController::class,'SignUp'])->middleware('guest');;
+Route::get('/Sign up',[UserController::class,'SignUp']);
 
 // create user
 Route::post('/users',[UserController::class,'store']);
 
 // Log Out
-Route::post('/Log out', [UserController::class, 'logout'])->middleware('auth');
+Route::post('/Log out', [UserController::class, 'logout']);
 
 // Login
-Route::get('/Log in', [UserController::class, 'LogIn'])->name('LogIn')->middleware('guest');
+Route::get('/Log in', [UserController::class, 'login']);
 
 // Log In User
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);

@@ -63,7 +63,7 @@
                     <div class="mt-8">
                         <p>
                           Already have an account?
-                          <a href="/login" class="text-danger">Login</a>
+                          <a href="/Log in" class="text-danger">Login</a>
                         </p>
                     </div>
                 </form>
