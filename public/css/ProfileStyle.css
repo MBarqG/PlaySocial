@@ -115,10 +115,10 @@ nav{
 .minimize a p{
     display: none;
 }
-.minimize a h3{
+.minimize h3{
     display: none;
 }
-.minimize a hr{
+.minimize hr{
    width: 50%;
    margin-bottom: 25px;
 }
