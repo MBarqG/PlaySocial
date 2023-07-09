@@ -29,7 +29,7 @@ class UserController extends Controller
         
         auth()->login($user);
 
-        $profileLink = "dashboard";
+        $profileLink = "/";
         return redirect($profileLink)->with('message', 'User created and logged in');
     }
 
@@ -40,8 +40,12 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('message', 'You have been logged out!');
+        $profileLink = "/";
+        return redirect($profileLink)->with('message', 'You have been logged out!');
+    }
 
+    public function OpenProfile(){
+        return view('Profile');
     }
 
     // Show Login Form

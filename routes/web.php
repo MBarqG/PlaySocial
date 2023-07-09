@@ -35,3 +35,6 @@ Route::get('/Log in', [UserController::class, 'login']);
 
 // Log In User
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+
+//profile page
+Route::get('/Profile', [UserController::class, 'OpenProfile']);
