@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -20,21 +21,23 @@ Route::get('/', function () {
     return view('WelcomePage');
 });
 
-
 // Sign up
-Route::get('/Sign up',[UserController::class,'SignUp']);
+Route::get('/Signup',[UserController::class,'SignUp']);
 
 // create user
 Route::post('/users',[UserController::class,'store']);
 
-// Log Out
-Route::post('/Log out', [UserController::class, 'logout']);
-
 // Login
-Route::get('/Log in', [UserController::class, 'login']);
+Route::get('/Login', [UserController::class, 'login'])->name('Login');
 
 // Log In User
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 
+// Log Out
+Route::post('/Logout', [UserController::class, 'logout']);
+
+
 //profile page
-Route::get('/Profile', [UserController::class, 'OpenProfile']);
+Route::get('/Profile', [UserController::class, 'OpenProfile'])->middleware('auth')->name('Profile');
+
+Route::get('/video', [UserController::class, 'OpenContent']);

@@ -23,7 +23,7 @@
     </div>
     <div class="navEnd flex-div">
     <img src="{{ asset('images/upload.png') }}" >
-    <img src="{{ asset('images/default.png') }}" class="user-icon">
+    <img src="{{ Auth::user()->profile_picture }}" class="user-icon">
   </div>
   </nav>
     <!----------side bar------->
@@ -47,16 +47,28 @@
     {{--------------places holder need to be dynamic-----------------}}
       <div class="list-container">
         <div class="vid-list">
-          <a href=""><img src="{{ asset('images\Monetization slide.png')}}" class="thumbnail"></a>
+          <a href="/video"><img src="{{ asset('images\Monetization slide.png')}}" class="thumbnail"></a>
           <div class="flex-div">
             {{-- <img src="{{ asset('images\instructor.jpg') }}"> --}}
             <div class="vid-info">
               <a href="">Monetization slide</a>
-              <p>PlaySocal</p>
+              <p>PlaySocial</p>
               <p>100k views 2 days</p>
             </div>
           </div>
-        </div>        
+        </div>      
+        <div class="list-container">
+          <div class="vid-list">
+            <a href="/video"><img src="{{ asset('images\Monetization slide.png')}}" class="thumbnail"></a>
+            <div class="flex-div">
+              {{-- <img src="{{ asset('images\instructor.jpg') }}"> --}}
+              <div class="vid-info">
+                <a href="">Monetization slide</a>
+                <p>PlaySocial</p>
+                <p>100k views 2 days</p>
+              </div>
+            </div>
+          </div>    
         {{--------------places holder need to be dynamic-----------------}}
       </div>
     </div>

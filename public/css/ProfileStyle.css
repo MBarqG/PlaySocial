@@ -41,7 +41,7 @@ nav{
     width: 130px;
 }
 .navMid .Search-box{
-    border: 1px solid #ccc;
+    border: 1px solid #dc3545;
     margin-right: 15px;
     padding: 8px 12px;
     border-radius: 25px;
@@ -88,7 +88,7 @@ nav{
 .sidebar hr{
     border: 0;
     height: 1px;
-    background-color: #ccc;
+    background-color: #dc3545;
     width: 85%;
 }
 .following h3{

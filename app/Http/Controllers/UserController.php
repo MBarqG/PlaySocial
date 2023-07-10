@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 
 class UserController extends Controller
 {
@@ -29,8 +35,8 @@ class UserController extends Controller
         
         auth()->login($user);
 
-        $profileLink = "/";
-        return redirect($profileLink)->with('message', 'User created and logged in');
+        
+        return redirect()->route('Profile');
     }
 
     // Logout User
@@ -40,8 +46,7 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        $profileLink = "/";
-        return redirect($profileLink)->with('message', 'You have been logged out!');
+        return redirect("/");
     }
 
     public function OpenProfile(){
@@ -52,18 +57,23 @@ class UserController extends Controller
     public function login() {
         return view('LogIn');
     }
+    //open video 
+    public function OpenContent(){
+        return view('content');
+    }
+
 
     // Authenticate User
     public function authenticate(Request $request) {
         $formFields = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => 'required'
+             'email' => ['required','email'],
+             'password' => 'required'
         ]);
 
         if(auth()->attempt($formFields)) {
             $request->session()->regenerate();
 
-            return redirect('/')->with('message', 'You are now logged in!');
+            return redirect()->route('Profile');
         }
 
         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
