@@ -52,7 +52,24 @@
                 <button type="button" class="btn btn-danger">Follow</button>
             </div>
             <div class="video-descriparion">
-                
+                <P>top descriparion</P>
+                <p>bottom descriparion</p>
+                <hr>
+                <h4>134 comments</h4>
+
+                <div class="add-comment">
+                    <img src="{{ asset('images\instructor.jpg') }}">
+                    <input type="text"placeholder="add comment here...">
+                </div>
+                <div class="old-comments">
+                    <img src="{{ asset('images\instructor.jpg') }}">
+                    <div>
+                        <h3>Samer Huwari <span> 2 days ago </span></h3>
+                        <p>comment text</p>
+                    </div>
+                </div>
+
+
             </div>
         </div>
         <!--------------->
