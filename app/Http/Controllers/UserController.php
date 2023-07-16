@@ -15,6 +15,10 @@ use Symfony\Component\Console\Logger\ConsoleLogger;
 
 class UserController extends Controller
 {
+    public function open(){
+        return view('WelcomePage');
+    }
+    
     //show SignUp window
     public function SignUp(){
         return view('SignUp');
@@ -54,7 +58,7 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect("/");
+        return redirect()->route('WelcomePage');
     }
 
     public function OpenProfile(){

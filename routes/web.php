@@ -17,10 +17,7 @@ use App\Http\Controllers\VideoController;
 |
 */
 
-Route::get('/', function () {
-
-    return view('WelcomePage');
-});
+Route::get('/', [UserController::class,'open'])->name("WelcomePage");
 
 // Sign up
 Route::get('/Signup',[UserController::class,'SignUp']);
@@ -35,7 +32,7 @@ Route::get('/Login', [UserController::class, 'login'])->name('Login');
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 
 // Log Out
-Route::post('/Logout', [UserController::class, 'logout']);
+Route::get('/Logout', [UserController::class, 'logout']);
 
 
 //profile page

@@ -14,7 +14,7 @@
   <nav class="flex-div">
     <div class="navStart flex-div">
       <img src="{{ asset('images/menu.png') }}" class="menu-icon">
-      <img src="{{ asset('images/logo.png') }}" class="logo">
+      <a href="/Profile"><img src="{{ asset('images/logo.png') }}" class="logo"></a>
     </div>
     <div class="navMid flex-div">
       <div class="Search-box flex-div">
@@ -30,7 +30,8 @@
     <!----------side bar------->
     <div class="sidebar">
       <div class="shortcut-links">
-        <a href=""><img src="{{ asset('images/mainicon.png') }}"><p>Home</p></a>
+        <a href="/Profile"><img src="{{ asset('images/mainicon.png') }}"><p>Home</p></a>
+        <a href="/Logout"><img src="{{ asset('images/Logout.png') }}"><p>Logout</p></a>
         <hr>
       </div>
       <div class="following">
@@ -40,6 +41,7 @@
         <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
         <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
         <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
+        <hr>
       </div>
     </div>
 
@@ -52,9 +54,9 @@
         <div class="flex-div">
           <img src="{{ Auth::user()->profile_picture }}">
           <div class="vid-info">
-            <a href="{{$video->path}}">{{$video->title}}</a>
-            <p>{{$video->description}}</p>
-            <p>{{$video->duration}}</p>
+            <a href="{{$video->path}}">Title: {{$video->title}}</a>
+            <p>Description: {{$video->description}}</p>
+            <p>Video Duration: {{$video->duration}} Seconds</p>
           </div>
         </div>
       </div>    
@@ -74,11 +76,12 @@
           <p class="text-red-500 text-xs mt-1">{{$message}}</p>
           @enderror
           <br>
-          <label for="description" class="inline-block text-red mb-4"> Video Description: </label>
-          <input type="text" class="border border-danger rounded" name="description"/>
+          <label for="description" class="inline-block text-red mb-4 textarea_label"> Video Description: </label>
+          <textarea style="margin-left: 30px" placeholder='Enter description...' rows="4" cols="48" class="border border-danger rounded large_text_box" name="description"></textarea>
           @error('description')
           <p class="text-red-500 text-xs mt-1">{{$message}}</p>
           @enderror
+          <br>
           <br>
           <label for="thumbnail" class="inline-block text-red mb-4">Video Thumbnail:</label>
           <input type="file" class="border border-danger rounded" name="thumbnail"/>
