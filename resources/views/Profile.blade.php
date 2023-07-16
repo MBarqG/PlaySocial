@@ -24,7 +24,7 @@
     </div>
     <div class="navEnd flex-div">
     <img src="{{ asset('images/upload.png') }}" class="upload-icon" >
-    <img src="{{ Auth::user()->profile_picture}}" class="user-icon">
+    <img src="{{ Auth::user()->profile_picture }}" class="user-icon">
   </div>
   </nav>
     <!----------side bar------->
@@ -50,11 +50,11 @@
     @foreach ($videos as $video)
     <div class="list-container">
       <div class="vid-list">
-        <a href="{{$video->path}}"><img src="{{ $video->thumbnail}}" class="thumbnail"></a>
+        <a href="/video/{{$video->id}}"><img src="{{ $video->thumbnail}}" class="thumbnail"></a>
         <div class="flex-div">
           <img src="{{ Auth::user()->profile_picture }}">
           <div class="vid-info">
-            <a href="{{$video->path}}">Title: {{$video->title}}</a>
+            <a href="/video/{{$video->id}}">Title: {{$video->title}}</a>
             <p>Description: {{$video->description}}</p>
             <p>Video Duration: {{$video->duration}} Seconds</p>
           </div>

@@ -62,17 +62,13 @@ class UserController extends Controller
     }
 
     public function OpenProfile(){
-        $videos =  DB::table("contents")->select("title",'description','path','thumbnail','duration')->where('user_id','=',auth()->id())->get();
+        $videos =  DB::table("contents")->select("id","title",'description','path','thumbnail','duration')->where('user_id','=',auth()->id())->get();
         return view('Profile',['videos' => $videos]);
     }
 
     // Show Login Form
     public function login() {
         return view('LogIn');
-    }
-    //open video 
-    public function OpenContent(){
-        return view('content');
     }
 
 

@@ -156,24 +156,24 @@ nav{
     font-size: 13px;
 }
 
-.video-descriparion{
+.video-descripion{
     padding-left: 55px;
     margin: 15px 0px;
 }
 
-.video-descriparion p{
+.video-descripion p{
     font-size: 14px;
     margin-bottom: 5px;
     color: #5a5a5a;
 }
 
-.video-descriparion hr{
+.video-descripion hr{
     border: 0;
     height: 1px;
     background: #dc3545;
     margin: 10px 0px;
 }
-.video-descriparion h4{
+.video-descripion h4{
     font-size: 14px;
     color: #5a5a5a;
     margin-top: 15px;
@@ -231,7 +231,7 @@ nav{
     .right-sidebar{
         flex-basis: 100%;
     }
-    .video-descriparion{
+    .video-descripion{
         padding-left: 0;
     }
     .play-video .play-video-info a{

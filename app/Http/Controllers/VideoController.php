@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contents;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
@@ -39,13 +40,24 @@ class VideoController extends Controller
         $path = $PP->storeAs('thumbnail', $PP_name ,'public');
 
         $videofilds['thumbnail'] = 'storage/'.$path;
-
-
-
-
         
         Contents::create($videofilds);
 
         return redirect("Profile");
     }
+
+    //open video 
+    public function OpenContent(Request $request,$id){
+        $video = Contents::findOrFail($id);
+        $creatorlist = DB::table("users")->select("name","profile_picture")->where('id','=', $video->user_id)->get();
+        $creator=$creatorlist[0];
+        $videoList =  DB::table("contents")->
+                select("id","title",'user_id','path','thumbnail','duration')->
+                where('user_id','=',auth()->id())->
+                get();
+
+
+        return view('content',['video' => $video, "creator" => $creator , "videoList" => $videoList]);
+    }
+    
 }

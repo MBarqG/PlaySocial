@@ -38,7 +38,7 @@ Route::get('/Logout', [UserController::class, 'logout']);
 //profile page
 Route::get('/Profile', [UserController::class, 'OpenProfile'])->middleware('auth')->name('Profile');
 
-Route::get('/video', [UserController::class, 'OpenContent']);
+Route::get('/video/{id}', [VideoController::class, 'OpenContent']);
 
 
 //upload video

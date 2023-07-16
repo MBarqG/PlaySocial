@@ -12,8 +12,8 @@
 <body>
     <nav class="flex-div">
         <div class="navStart flex-div">
-          <img src="{{ asset('images/menu.png') }}" class="menu-icon">
-          <img src="{{ asset('images/logo.png') }}" class="logo">
+          {{-- <img src="{{ asset('images/menu.png') }}" class="menu-icon"> --}}
+          <a href="/Profile"><img src="{{ asset('images/logo.png') }}" class="logo"></a>
         </div>
         <div class="navMid flex-div">
           <div class="Search-box flex-div">
@@ -22,8 +22,8 @@
           </div>
         </div>
         <div class="navEnd flex-div">
-        <img src="{{ asset('images/upload.png') }}" >
-        <img src="{{ Auth::user()->profile_picture }}" class="user-icon">
+        {{-- <img src="{{ asset('images/upload.png') }}" > --}}
+        <img src="{{ asset(Auth::user()->profile_picture) }}" class="user-icon">
       </div>
       </nav>
 
@@ -32,11 +32,11 @@
         <!-------change to be dynamic-------->
         <div class="play-video">
             <video controls autoplay>
-                <source  src="{{ asset('Videos\test1.mkv') }}" type="video/mp4">
+                <source  src="{{asset($video->path)}}" type="video/mp4">
             </video>
-            <h3>test1</h3>
+            <h3>{{$video->title}}</h3>
             <div class="play-video-info">
-                <p>100k views 2 days</p>
+                <p>Duration : {{$video->duration}} Seconds</p>
                 <div>
                     <a href=""><img src="{{ asset('images\like.png') }}">125</a>
                     <a href=""><img src="{{ asset('images\dislike.png') }}">2</a>
@@ -44,16 +44,15 @@
             </div>
             <hr>
             <div class="plublisher">
-                <img src="{{ Auth::user()->profile_picture }}">
+                <img src="{{ asset($creator->profile_picture) }}">
                 <div>
-                    <p>Mohammed barq</p>
+                    <p>{{$creator->name}}</p>
                     <span>10 Followers</span>
                 </div>
                 <button type="button" class="btn btn-danger">Follow</button>
             </div>
-            <div class="video-descriparion">
-                <P>top descriparion</P>
-                <p>bottom descriparion</p>
+            <div class="video-descripion">
+                <P>{{$video->description}}</P>
                 <hr>
                 <h4>134 comments</h4>
 
@@ -75,14 +74,19 @@
         <!--------------->
         <div class="right-sidebar">
             <!-------change to be dynamic-------->
+            @foreach ($videoList as $Videoitem)
+            @if ($Videoitem->id == $video->id)
+                @continue
+            @endif
             <div class="side-video-list">
-                <a href="" class="small-thumbnail"><img src="{{ asset('images\Collaboration slide.png')}}"></a>
+                <a href="/video/{{$Videoitem->id}}" class="small-thumbnail"><img src="{{ asset($Videoitem->thumbnail)}}"></a>
                 <div class="video-info">
-                    <a href="">Collaboration</a>
-                    <p>Mohammed barq</p>
-                    <p>69k views</p>
+                    <a href="/video/{{$Videoitem->id}}">{{$Videoitem->title}}</a>
+                    <p>{{$creator->name}}</p>
+                    <p>Duration : {{$Videoitem->duration}} Seconds</p>
                 </div>
             </div>
+            @endforeach
             <!--------------->
         </div>
     </div>
