@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,7 @@ Route::post('/Logout', [UserController::class, 'logout']);
 Route::get('/Profile', [UserController::class, 'OpenProfile'])->middleware('auth')->name('Profile');
 
 Route::get('/video', [UserController::class, 'OpenContent']);
+
+
+//upload video
+Route::post("UploadVideo",[VideoController::class,'upload']);

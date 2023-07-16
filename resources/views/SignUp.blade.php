@@ -26,8 +26,15 @@
                 <p class="mb-4">Create an account</p>
                 <hr>
                 </header>
-                <form method="POST" action="/users">
+                <form method="POST" action="/users" enctype="multipart/form-data">
                     @csrf
+                    <div class="mb-6">
+                        <label for="profile_picture" class="inline-block text-red mb-4">Profile Picture</label>
+                        <input type="file" class="border border-danger rounded" name="profile_picture"/>
+                        @error('profile_picture')
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                        @enderror
+                    </div>
                     <div class="mb-6">
                         <label for="name" class="inline-block text-red mb-4"> Name </label>
                         <input type="text" class="border border-danger rounded" name="name"/>

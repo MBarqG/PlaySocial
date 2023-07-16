@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 
 class UserController extends Controller
@@ -26,6 +27,13 @@ class UserController extends Controller
             'email' => ['required','email', Rule::unique('users','email')],
             'password' => 'required|confirmed|min:8'
         ]);
+        $PP = $request->file("profile_picture");
+        $PP_name = time() . "." . $PP->getClientOriginalExtension();
+        $validation['filename'] = $PP_name;
+        $path = $PP->storeAs('profile_picture', $PP_name ,'public');
+        $formfilds['profile_picture'] = 'storage/'.$path;
+
+
 
         //Hash Password
         $formfilds['password'] = bcrypt($formfilds['password']);
@@ -50,7 +58,8 @@ class UserController extends Controller
     }
 
     public function OpenProfile(){
-        return view('Profile');
+        $videos =  DB::table("contents")->select("title",'description','path','thumbnail','duration')->where('user_id','=',auth()->id())->get();
+        return view('Profile',['videos' => $videos]);
     }
 
     // Show Login Form

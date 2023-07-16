@@ -12,11 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('content', function (Blueprint $table) {
+        Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->text('description');
+            $table->text('path');
+            $table->string('thumbnail');
             $table->timestamp('upload_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('duration');
 
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('content');
+        Schema::dropIfExists('contents');
     }
 };

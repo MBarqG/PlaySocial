@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="images/mainicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css\ProfileStyle.css') }}">
     <title>PlaySocial</title> 
 </head>
@@ -22,8 +23,8 @@
       </div>
     </div>
     <div class="navEnd flex-div">
-    <img src="{{ asset('images/upload.png') }}" >
-    <img src="{{ Auth::user()->profile_picture }}" class="user-icon">
+    <img src="{{ asset('images/upload.png') }}" class="upload-icon" >
+    <img src="{{ Auth::user()->profile_picture}}" class="user-icon">
   </div>
   </nav>
     <!----------side bar------->
@@ -44,37 +45,64 @@
 
     {{-- --------------main------------- --}}
     <div class="container">
-    {{--------------places holder need to be dynamic-----------------}}
-      <div class="list-container">
-        <div class="vid-list">
-          <a href="/video"><img src="{{ asset('images\Monetization slide.png')}}" class="thumbnail"></a>
-          <div class="flex-div">
-            {{-- <img src="{{ asset('images\instructor.jpg') }}"> --}}
-            <div class="vid-info">
-              <a href="">Monetization slide</a>
-              <p>PlaySocial</p>
-              <p>100k views 2 days</p>
-            </div>
+    @foreach ($videos as $video)
+    <div class="list-container">
+      <div class="vid-list">
+        <a href="{{$video->path}}"><img src="{{ $video->thumbnail}}" class="thumbnail"></a>
+        <div class="flex-div">
+          <img src="{{ Auth::user()->profile_picture }}">
+          <div class="vid-info">
+            <a href="{{$video->path}}">{{$video->title}}</a>
+            <p>{{$video->description}}</p>
+            <p>{{$video->duration}}</p>
           </div>
-        </div>      
-        <div class="list-container">
-          <div class="vid-list">
-            <a href="/video"><img src="{{ asset('images\Monetization slide.png')}}" class="thumbnail"></a>
-            <div class="flex-div">
-              {{-- <img src="{{ asset('images\instructor.jpg') }}"> --}}
-              <div class="vid-info">
-                <a href="">Monetization slide</a>
-                <p>PlaySocial</p>
-                <p>100k views 2 days</p>
-              </div>
-            </div>
-          </div>    
-        {{--------------places holder need to be dynamic-----------------}}
+        </div>
+      </div>    
+    @endforeach
       </div>
     </div>
 
+    <div class="overlay-card">
+      <div class="card-content">
+        <h2>upload your Video</h2>
+        <hr>
+        <form method="POST"  action="UploadVideo" enctype="multipart/form-data">
+          @csrf
+          <label for="title" class="inline-block text-red mb-4"> Video Title: </label>
+          <input type="text" class="border border-danger rounded" name="title"/>
+          @error('title')
+          <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+          @enderror
+          <br>
+          <label for="description" class="inline-block text-red mb-4"> Video Description: </label>
+          <input type="text" class="border border-danger rounded" name="description"/>
+          @error('description')
+          <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+          @enderror
+          <br>
+          <label for="thumbnail" class="inline-block text-red mb-4">Video Thumbnail:</label>
+          <input type="file" class="border border-danger rounded" name="thumbnail"/>
+          @error('thumbnail')
+          <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+          @enderror
+          <br>
+          <label for="path" class="inline-block text-red mb-4">Upload Video:</label>
+          <input type="file" class="border border-danger rounded" name="path"/>
+          @error('path')
+          <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+          @enderror
+          <br>
+          <button class="btn btn-outline-danger" type="submit">Upload</button>
+          <hr>
+        </form>
+        <button class="btn btn-danger" onclick="hideOverlay()">close</button>
+      </div>
+  </div>
 
-      
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
       <script src="{{ asset('js\main.js') }}"></script>
 </body>
 </html>
