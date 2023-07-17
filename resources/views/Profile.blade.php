@@ -48,6 +48,10 @@
     {{-- --------------main------------- --}}
     <div class="container">
     @foreach ($videos as $video)
+    @php
+    $videoDate = Carbon\Carbon::parse($video->created_at);
+    $timeDifference = $videoDate->diffForHumans();
+    @endphp 
     <div class="list-container">
       <div class="vid-list">
         <a href="/video/{{$video->id}}"><img src="{{ $video->thumbnail}}" class="thumbnail"></a>
@@ -56,6 +60,7 @@
           <div class="vid-info">
             <a href="/video/{{$video->id}}">Title: {{$video->title}}</a>
             <p>Description: {{$video->description}}</p>
+            <p>Upload: {{$timeDifference}} </p>
             <p>Video Duration: {{$video->duration}} Seconds</p>
           </div>
         </div>
@@ -68,7 +73,7 @@
       <div class="card-content">
         <h2>upload your Video</h2>
         <hr>
-        <form method="POST"  action="UploadVideo" enctype="multipart/form-data">
+        <form method="POST" action="UploadVideo" enctype="multipart/form-data">
           @csrf
           <label for="title" class="inline-block text-red mb-4"> Video Title: </label>
           <input type="text" class="border border-danger rounded" name="title"/>
@@ -77,7 +82,7 @@
           @enderror
           <br>
           <label for="description" class="inline-block text-red mb-4 textarea_label"> Video Description: </label>
-          <textarea style="margin-left: 30px" placeholder='Enter description...' rows="4" cols="48" class="border border-danger rounded large_text_box" name="description"></textarea>
+          <textarea placeholder='Enter description...' rows="4" cols="48" class="border border-danger rounded large_text_box" name="description"></textarea>
           @error('description')
           <p class="text-red-500 text-xs mt-1">{{$message}}</p>
           @enderror

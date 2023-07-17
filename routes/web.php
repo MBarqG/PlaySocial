@@ -38,8 +38,12 @@ Route::get('/Logout', [UserController::class, 'logout']);
 //profile page
 Route::get('/Profile', [UserController::class, 'OpenProfile'])->middleware('auth')->name('Profile');
 
+//open video
 Route::get('/video/{id}', [VideoController::class, 'OpenContent']);
 
 
 //upload video
 Route::post("UploadVideo",[VideoController::class,'upload']);
+
+//add comment
+Route::post('{id}/addcomment', [VideoController::class, 'Postcomment']);

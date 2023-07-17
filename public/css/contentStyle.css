@@ -241,8 +241,6 @@ nav{
     }
 }
 
-
-
 @media (max-width:900px){
     .menu-icon{
         display: none;
@@ -260,4 +258,8 @@ nav{
     .logo{
         width: 90px;
     }
+}
+
+.hideinput{
+    display: none;
 }

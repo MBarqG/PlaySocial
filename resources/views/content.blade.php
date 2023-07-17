@@ -54,23 +54,33 @@
             <div class="video-descripion">
                 <P>{{$video->description}}</P>
                 <hr>
-                <h4>134 comments</h4>
-
+                <h4>{{count($comments)}} comments</h4>
+                <form method="Post" action="{{url($video->id . '/addcomment')}}">
+                @csrf
                 <div class="add-comment">
-                    <img src="{{ asset('images\instructor.jpg') }}">
-                    <input type="text"placeholder="add comment here...">
+                    <img src="{{ asset(Auth::user()->profile_picture)}}">
+                    <input autocomplete="off" type="text" placeholder="add comment here..." name="comment_text">
+                    <input type="text" class="hideinput" value="{{$video->id}}" name="content_id">
+                    <input type="submit" class="hideinput">
                 </div>
-                <div class="old-comments">
-                    <img src="{{ asset('images\instructor.jpg') }}">
+                </form>
+                @foreach ($comments as $comment) 
+                <div class="old-comments">  
+                    @php
+                    $user = App\Models\User::find($comment->user_id);
+                    $commentDate = Carbon\Carbon::parse($comment->created_at);
+                    $timeDifference = $commentDate->diffForHumans();
+                    @endphp 
+                    <img src="{{ asset($user->profile_picture) }}">
                     <div>
-                        <h3>Samer Huwari <span> 2 days ago </span></h3>
-                        <p>comment text</p>
+                        <h3>{{$user->name}} <span>{{ $timeDifference }}</span></h3>
+                        <p>{{$comment->comment_text}}</p>
                     </div>
                 </div>
-
-
+                @endforeach
             </div>
         </div>
+
         <!--------------->
         <div class="right-sidebar">
             <!-------change to be dynamic-------->

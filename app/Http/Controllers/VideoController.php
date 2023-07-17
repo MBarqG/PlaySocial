@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\comments;
 use App\Models\Contents;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -56,8 +57,21 @@ class VideoController extends Controller
                 where('user_id','=',auth()->id())->
                 get();
 
+        $comments = DB::table("comments")->
+        select('user_id','comment_text','created_at')->
+        where('content_id','=',$id)->
+        get();
 
-        return view('content',['video' => $video, "creator" => $creator , "videoList" => $videoList]);
+        return view('content',['video' => $video, "creator" => $creator , "videoList" => $videoList ,'comments' => $comments]);
     }
-    
+
+    public function Postcomment(Request $request){
+        $commentfilds = $request->validate([
+            'comment_text'=> ['required'],
+            'content_id'=>['required']
+            ]);
+        $commentfilds['user_id'] = auth()->id();
+        comments::create($commentfilds);
+        return redirect()->back();
+    }
 }
