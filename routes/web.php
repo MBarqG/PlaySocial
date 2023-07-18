@@ -47,3 +47,12 @@ Route::post("UploadVideo",[VideoController::class,'upload']);
 
 //add comment
 Route::post('{id}/addcomment', [VideoController::class, 'Postcomment']);
+
+//save video
+Route::post('{id}/save', [VideoController::class, 'saveVideo']);
+
+//remove from saved list video
+Route::post('{id}/unsave', [VideoController::class, 'unsaveVideo']);
+
+//saved video 
+Route::get('/saves', [UserController::class, 'OpenSaved'])->middleware('auth')->name('Saved');

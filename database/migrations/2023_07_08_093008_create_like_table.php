@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('like', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('content_id');
-            $table->timestamp('like_date')->nullable();
 
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

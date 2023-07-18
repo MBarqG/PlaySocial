@@ -112,14 +112,20 @@ nav{
     color: #5a5a5a;
 }
 
-.play-video .play-video-info a img{
+.play-video .play-video-info form button img{
     width: 30px;
     margin-right: 8px;
 }
-.play-video .play-video-info a {
+.play-video .play-video-info form button {
     display: inline-flex;
     align-items: center;
     margin-left: 15px;
+    background: transparent;
+    border: none;
+}
+.play-video .play-video-info form span {
+    display: inline-flex;
+    align-items: center;
 }
 .play-video hr{
     border: 0;

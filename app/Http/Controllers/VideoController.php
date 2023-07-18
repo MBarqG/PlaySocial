@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\comments;
 use App\Models\Contents;
+use App\Models\likes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -62,7 +63,12 @@ class VideoController extends Controller
         where('content_id','=',$id)->
         get();
 
-        return view('content',['video' => $video, "creator" => $creator , "videoList" => $videoList ,'comments' => $comments]);
+        $saved["is_saved"] = $this->checkIfSaved($id)[0];
+        $saved["saved_count"] = $this->checkIfSaved($id)[1];
+
+        //dd($saved);
+
+        return view('content',['saved' => $saved,'video' => $video, "creator" => $creator , "videoList" => $videoList ,'comments' => $comments]);
     }
 
     public function Postcomment(Request $request){
@@ -73,5 +79,44 @@ class VideoController extends Controller
         $commentfilds['user_id'] = auth()->id();
         comments::create($commentfilds);
         return redirect()->back();
+    }
+
+    public function saveVideo(Request $request){
+        $info = $request->validate([
+            'content_id'=>['required']
+            ]);
+        $info['user_id'] = auth()->id();
+        likes::create($info);
+        return back();
+    }
+
+    public function unsaveVideo(Request $request){
+        $info = $request->validate([
+            'content_id'=>['required']
+            ]);
+        DB::table("likes")->
+        where("content_id","=", $info["content_id"])->
+        where('user_id','=', auth()->id())->
+        delete();
+        return back();
+    }
+
+    public function checkIfSaved($id){
+        $saved = DB::table("likes")->
+        select('user_id','content_id')->
+        where("content_id","=", $id)->get();
+
+        $savedByUser = DB::table("likes")->
+        select('user_id','content_id')->
+        where("content_id","=", $id )->
+        where('user_id','=', auth()->id())->get();
+
+        if(count($savedByUser) == 1)
+        {
+            return [true , count($saved)];
+        }
+        elseif(count($savedByUser) == 0){
+            return [false , count($saved)]; 
+        }
     }
 }

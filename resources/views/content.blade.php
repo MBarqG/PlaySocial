@@ -38,8 +38,21 @@
             <div class="play-video-info">
                 <p>Duration : {{$video->duration}} Seconds</p>
                 <div>
-                    <a href=""><img src="{{ asset('images\like.png') }}">125</a>
-                    <a href=""><img src="{{ asset('images\dislike.png') }}">2</a>
+                    @if($saved['is_saved'])
+                    <form method="POST" action=" {{url($video->id . '/unsave')}}">
+                        @csrf
+                        <input type="text" class="hideinput" value="{{$video->id}}" name="content_id">
+                        <button type="submit"><img type src="{{ asset('images\save on.png') }}"></button>
+                        <span>{{$saved['saved_count']}}</span>
+                        </form>
+                    @else
+                    <form method="POST" action=" {{url($video->id . '/save')}}">
+                        @csrf
+                        <input type="text" class="hideinput" value="{{$video->id}}" name="content_id">
+                        <button type="submit"><img src="{{ asset('images\save off.png') }}"></button>
+                        <span>{{$saved['saved_count']}}</span>
+                        </form>
+                    @endif
                 </div>
             </div>
             <hr>

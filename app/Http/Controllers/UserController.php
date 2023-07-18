@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Mail\Mailables\Content;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -64,6 +65,12 @@ class UserController extends Controller
     public function OpenProfile(){
         $videos =  DB::table("contents")->select("id","title",'description','path','thumbnail','duration','created_at')->where('user_id','=',auth()->id())->get();
         return view('Profile',['videos' => $videos]);
+    }
+
+    public function OpenSaved(){
+        $saved =  DB::table("likes")->select('content_id')->where("user_id", '=' ,auth()->id())->pluck('content_id');
+        $videos =  DB::table("contents")->select("id","title",'description','path','thumbnail','duration','created_at')->whereIn('id', $saved)->get();
+        return view('savedvideos',['videos' => $videos]);
     }
 
     // Show Login Form

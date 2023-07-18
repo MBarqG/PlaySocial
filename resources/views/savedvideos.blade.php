@@ -30,8 +30,8 @@
     <!----------side bar------->
     <div class="sidebar">
       <div class="shortcut-links">
-        <a style="color: #dc3545" href="/Profile"><img src="{{ asset('images/mainicon.png') }}"><p>Home</p></a>
-        <a href="/saves"><img src="{{ asset('images/save on.png') }}"><p>Saved videos</p></a>
+        <a href="/Profile"><img src="{{ asset('images/mainicon.png') }}"><p>Home</p></a>
+        <a style="color: #dc3545;" href="/saves"><img src="{{ asset('images/save on.png') }}"><p>Saved videos</p></a>
         <a href="/Logout"><img src="{{ asset('images/Logout.png') }}"><p>Logout</p></a>
         <hr>
       </div>
