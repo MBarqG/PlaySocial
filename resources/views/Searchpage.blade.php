@@ -48,19 +48,35 @@
         <hr>
       </div>
     </div>
-
-    {{----------------main---------------}}
+    {{----------------main videos---------------}}
     <div class="container">
-    <div class="list-container">
-      @foreach ($videos as $video)
+      <h2>Channels: <hr> </h2>
+        @foreach ($creators as $creator)
+        <div class="list-container">
+          <div class="vid-listC">
+            <a href="/profile/{{$creator->id}}"><img src="{{ $creator->profile_picture}}" class="profile_picture"></a>
+            <button type="button" class="btn btn-danger">Follow</button>
+            <div class="flex-divC">
+              <p>Name: {{ $creator->name }}</p>
+            </div>
+          </div>
+          @endforeach
+        </div> 
+    </div>
+    {{----------------main videos---------------}}
+    <div class="container">
+      <h2>Videos: <hr></h2>
+    <div class="list-container"> 
+      @foreach ($Videos as $video)
       @php
       $videoDate = Carbon\Carbon::parse($video->created_at);
       $timeDifference = $videoDate->diffForHumans();
+      $user = App\Models\User::find($video->user_id);
       @endphp 
       <div class="vid-list">
         <a href="/video/{{$video->id}}"><img src="{{ $video->thumbnail}}" class="thumbnail"></a>
         <div class="flex-div">
-          <img src="{{ Auth::user()->profile_picture }}">
+          <img src="{{ asset($user->profile_picture) }}">
           <div class="vid-info">
             <a href="/video/{{$video->id}}">Title: {{$video->title}}</a>
             <p>Description: {{$video->description}}</p>
@@ -68,10 +84,10 @@
             <p>Video Duration: {{$video->duration}} Seconds</p>
           </div>
         </div>
-      </div>    
-    @endforeach
-      </div>
+      </div> 
+      @endforeach   
     </div>
+  </div>
 
     <div class="overlay-card">
       <div class="card-content">

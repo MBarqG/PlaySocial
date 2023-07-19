@@ -24,6 +24,12 @@ nav{
     top: 0;
     z-index: 10;
 }
+hr{
+    border: 0;
+    height: 1px;
+    background-color: #dc3545;
+    width: 100%;
+}
 .navEnd img{
     width: 25px;
     margin-right: 25px;
@@ -139,6 +145,7 @@ nav{
     grid-column-gap: 16px;
     grid-row-gap: 30px;
     margin-top: 15px;
+    flex-wrap: wrap;
 }
 .vid-list .thumbnail{
     width: 100%;
@@ -250,4 +257,26 @@ nav{
         height: 4em;
         width: 20em;
     }
+}
+
+.hiddenbutton{
+    background: transparent;
+    border: none;
+}
+.vid-listC .profile_picture{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.flex-divC{
+    display: flex;
+    align-items: center;
+}
+.vid-listC {
+    height: 100px; /* Set a fixed height for each channel list item */
+  }  
+.vid-listC .flex-divC {
+    justify-items: center;
+    align-items: flex-start;
+    margin-top: 7px;
 }

@@ -6,13 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\Console\Logger\ConsoleLogger;
 
 class UserController extends Controller
 {

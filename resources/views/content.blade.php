@@ -17,8 +17,11 @@
         </div>
         <div class="navMid flex-div">
           <div class="Search-box flex-div">
-            <input type="text" placeholder="Search">
-            <img src="{{ asset('images/search-icon.png') }}">
+            <form method="GET" action="/Search">
+                @csrf
+                <input autocomplete="off" type="text" placeholder="Search" name="text">
+                <button class="hiddenbutton" type="submit"><img src="{{ asset('images/search-icon.png') }}"></button>          
+              </form>
           </div>
         </div>
         <div class="navEnd flex-div">

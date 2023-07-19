@@ -269,3 +269,7 @@ nav{
 .hideinput{
     display: none;
 }
+.hiddenbutton{
+    background: transparent;
+    border: none;
+}

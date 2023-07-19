@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SearchController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -56,3 +57,6 @@ Route::post('{id}/unsave', [VideoController::class, 'unsaveVideo']);
 
 //saved video 
 Route::get('/saves', [UserController::class, 'OpenSaved'])->middleware('auth')->name('Saved');
+
+//search videos/users
+Route::get("/Search",[SearchController::class,'Search']);
