@@ -63,3 +63,8 @@ Route::get("/Search",[SearchController::class,'Search']);
 
 Route::get('/profile/{id}', [SearchController::class, 'OpenChannel'])->name('profile');
 
+
+Route::post('{id}/Follow', [UserController::class, 'Follow']);
+
+//remove from saved list video
+Route::post('{id}/unFollow', [UserController::class, 'unFollow']);

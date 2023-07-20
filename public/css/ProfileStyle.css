@@ -106,7 +106,8 @@ hr{
     flex-wrap: wrap;
 }
 .following a img{
-    width: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50px;
     margin-right: 20px;
 }
@@ -285,7 +286,7 @@ hr{
 }
 .vid-listC {
     height: 100px; /* Set a fixed height for each channel list item */
-  }  
+  } 
 .vid-listC .flex-divC {
     justify-items: center;
     align-items: flex-start;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follows;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -57,13 +58,15 @@ class UserController extends Controller
 
     public function OpenProfile(){
         $videos =  DB::table("contents")->select("id","title",'description','path','thumbnail','duration','created_at')->where('user_id','=',auth()->id())->get();
-        return view('Profile',['videos' => $videos]);
+        $FollowList = DB::table("Follows")->select("creator_id")->where('subscriber_id','=',auth()->id())->get();
+        return view('Profile',['videos' => $videos , 'FollowList' => $FollowList]);
     }
 
     public function OpenSaved(){
         $saved =  DB::table("likes")->select('content_id')->where("user_id", '=' ,auth()->id())->pluck('content_id');
         $videos =  DB::table("contents")->select("id","title",'description','path','thumbnail','duration','created_at')->whereIn('id', $saved)->get();
-        return view('savedvideos',['videos' => $videos]);
+        $FollowList = DB::table("Follows")->select("creator_id")->where('subscriber_id','=',auth()->id())->get();
+        return view('savedvideos',['videos' => $videos , 'FollowList' => $FollowList]);
     }
 
     // Show Login Form
@@ -86,5 +89,46 @@ class UserController extends Controller
         }
 
         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
+    }
+
+
+    //Follow logic
+    public function Follow(Request $request){
+        $info = $request->validate([
+            'creator_id'=>['required']
+            ]);
+        $info['subscriber_id'] = auth()->id();
+        Follows::create($info);
+        return back();
+    }
+
+    public function unFollow(Request $request){
+        $info = $request->validate([
+            'creator_id'=>['required']
+            ]);
+        DB::table("Follows")->
+        where("creator_id","=", $info["creator_id"])->
+        where('subscriber_id','=', auth()->id())->
+        delete();
+        return back();
+    }
+
+    public function checkIfFollow($id){
+        $Followed = DB::table("Follows")->
+        select('subscriber_id','creator_id')->
+        where("creator_id","=", $id)->get();
+
+        $FollowedbyUser = DB::table("Follows")->
+        select('subscriber_id','creator_id')->
+        where("creator_id","=", $id )->
+        where('subscriber_id','=', auth()->id())->get();
+
+        if(count($FollowedbyUser) == 1)
+        {
+            return [true , count($Followed)];
+        }
+        elseif(count($FollowedbyUser) == 0){
+            return [false , count($Followed)]; 
+        }
     }
 }

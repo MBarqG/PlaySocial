@@ -40,32 +40,52 @@
       </div>
       <div class="following">
         <h3>Following</h3>
-        <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
-        <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
-        <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
-        <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
-        <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
+        @foreach ($FollowList as $Follow)
+        @php
+            $user = App\Models\User::find($Follow->creator_id);
+        @endphp
+        <a href="{{ route('profile', ['id' => $user->id]) }}"><img src="{{ asset($user->profile_picture) }}"><p>{{$user->name}}</p></a>
+        @endforeach
         <hr>
       </div>
     </div>
     {{----------------main videos---------------}}
     <div class="container">
       <h2>Channels: <hr> </h2>
-        @foreach ($creators as $creator)
+      @foreach ($creators as $creator)
         <div class="list-container">
           <div class="vid-listC">
-            <a href="{{ route('profile', ['id' => $creator->id]) }}"><img src="{{ $creator->profile_picture}}" class="profile_picture"></a>
-            @if ($creator->id != auth()->id())
-            <button type="button" class="btn btn-danger">Follow</button> 
-            @endif
-            <div class="flex-divC">
-              <p>Name: {{ $creator->name }}</p>
+            {{-- <div class="profile-container"> --}}
+              <a href="{{ route('profile', ['id' => $creator->id]) }}">
+                <img src="{{ $creator->profile_picture }}" class="profile_picture">
+              </a>
+              @if ($creator->id != auth()->id())
+                @php
+                  $controller = new \App\Http\Controllers\UserController();
+                  $followData = $controller->checkIfFollow($creator->id);
+                @endphp
+                  @if ($followData[0])
+                    <form style="display: inline" method="POST" action="{{ url($creator->id . '/unFollow') }}">
+                      @csrf
+                      <input type="text" style="display: none" class="hideinput" value="{{ $creator->id }}" name="creator_id">
+                      <button type="submit" class="btn btn-outline-danger">Unfollow</button>
+                    </form>
+                  @else
+                    <form style="display: inline" method="POST" action="{{ url($creator->id . '/Follow') }}">
+                      @csrf
+                      <input type="text" style="display: none" value="{{ $creator->id }}" name="creator_id">
+                      <button type="submit" class="btn btn-danger">Follow</button>
+                    </form>
+                  @endif
+                  <p class="creator-info">Name: {{ $creator->name }}, {{ $followData[1] }} Followers</p>
+              @endif
             </div>
-          </div>
-          @endforeach
-        </div> 
+          {{-- </div> --}}
+      @endforeach
     </div>
   </div>
+</div>
+    
     {{----------------main videos---------------}}
     <div class="containerV">
       <h2>Videos: <hr></h2>

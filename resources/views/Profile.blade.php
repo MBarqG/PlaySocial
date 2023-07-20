@@ -40,11 +40,12 @@
       </div>
       <div class="following">
         <h3>Following</h3>
-        <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
-        <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
-        <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
-        <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
-        <a href=""><img src="{{ asset('images\instructor.jpg') }}"><p>Samer Huwari</p></a>
+        @foreach ($FollowList as $Follow)
+            @php
+                $user = App\Models\User::find($Follow->creator_id);
+            @endphp
+            <a href="{{ route('profile', ['id' => $user->id]) }}"><img src="{{ asset($user->profile_picture) }}"><p>{{$user->name}}</p></a>
+        @endforeach
         <hr>
       </div>
     </div>

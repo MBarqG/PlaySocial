@@ -60,12 +60,30 @@
             </div>
             <hr>
             <div class="plublisher">
-                <img src="{{ asset($creator->profile_picture) }}">
+                <a href="{{ route('profile', ['id' => $creator->id]) }}"><img src="{{ asset($creator->profile_picture) }}"></a>
                 <div>
-                    <p>{{$creator->name}}</p>
-                    <span>10 Followers</span>
+                @php
+                    $controller = new \App\Http\Controllers\UserController();
+                    $followData = $controller->checkIfFollow($creator->id);
+                  @endphp
+                    <a href="{{ route('profile', ['id' => $creator->id]) }}"><p>{{$creator->name}}</p></a>
+                    <span>{{$followData[1]}} Followers</span>
                 </div>
-                <button type="button" class="btn btn-danger">Follow</button>
+                @if ($creator->id != auth()->id())
+                    @if ($followData[0])
+                    <form method="POST" action="{{ url($creator->id . '/unFollow') }}">
+                        @csrf
+                        <input type="text" style="display: none" class="hideinput" value="{{ $creator->id }}" name="creator_id">
+                        <button type="submit" class="btn btn-outline-danger">Unfollow</button>
+                    </form>
+                    @else
+                    <form method="POST" action="{{ url($creator->id . '/Follow') }}">
+                        @csrf
+                        <input type="text" style="display: none" value="{{ $creator->id }}" name="creator_id">
+                        <button type="submit" class="btn btn-danger">Follow</button>
+                    </form>
+                    @endif
+                @endif
             </div>
             <div class="video-descripion">
                 <P>{{$video->description}}</P>
@@ -87,9 +105,9 @@
                     $commentDate = Carbon\Carbon::parse($comment->created_at);
                     $timeDifference = $commentDate->diffForHumans();
                     @endphp 
-                    <img src="{{ asset($user->profile_picture) }}">
+                    <a href="{{ route('profile', ['id' => $user->id]) }}"><img src="{{ asset($user->profile_picture) }}"></a>
                     <div>
-                        <h3>{{$user->name}} <span>{{ $timeDifference }}</span></h3>
+                        <a href="{{ route('profile', ['id' => $user->id]) }}"><h3>{{$user->name}} <span>{{ $timeDifference }}</span></h3></a>
                         <p>{{$comment->comment_text}}</p>
                     </div>
                 </div>

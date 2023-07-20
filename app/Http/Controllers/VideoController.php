@@ -51,7 +51,7 @@ class VideoController extends Controller
     //open video 
     public function OpenContent(Request $request,$id){
         $video = Contents::findOrFail($id);
-        $creatorlist = DB::table("users")->select("name","profile_picture")->where('id','=', $video->user_id)->get();
+        $creatorlist = DB::table("users")->select('id',"name","profile_picture")->where('id','=', $video->user_id)->get();
         $creator=$creatorlist[0];
         $videoList =  DB::table("contents")->
                 select("id","title",'user_id','path','thumbnail','duration')->
