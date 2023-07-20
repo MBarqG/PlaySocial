@@ -130,13 +130,13 @@ hr{
 
 .container{
     background: #ffffff;
-    padding-left: 14%;
+    padding-left: 10%;
     padding-right: 2%;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 .Largecontainer{
-    padding-left: 4%; 
+    padding-left: 1%; 
 }
 
 .list-container{
@@ -263,31 +263,41 @@ hr{
     background: transparent;
     border: none;
 }
-.containerV{
+.containerP {
     background: #ffffff;
-    margin: 0px 60px;
     padding-left: 17%;
     padding-right: 2%;
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
+    display:block;
 }
-.LargecontainerV{
+.LargecontainerP{
     padding-left: 7%; 
 }
-.vid-listC .profile_picture{
+.containerP .profile img {
     width: 100px;
     height: 100px;
+    margin-right: 10px;
     border-radius: 50%;
+    float: left;
 }
-.flex-divC{
-    display: flex;
-    align-items: center;
+
+
+.containerP .profile .user-info {
+    float: left;
+    margin-left: 15px;
 }
-.vid-listC {
-    height: 100px; /* Set a fixed height for each channel list item */
-  }  
-.vid-listC .flex-divC {
-    justify-items: center;
-    align-items: flex-start;
-    margin-top: 7px;
+
+.containerP .profile .user-info .user-name {
+    font-weight: 600;
+    font-size: 22px;
+    display: block;
+}
+
+.containerP .profile .user-info .following-count {
+    font-size: 14px; /* Adjust the font size as needed */
+}
+
+.containerP .profile button {
+    float: right;
 }

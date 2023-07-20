@@ -16,12 +16,8 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('subscriber_id');
             $table->unsignedBigInteger('creator_id');
-            $table->timestamp('subscription_date')->default(DB::raw('CURRENT_TIMESTAMP'));
-
-
             $table->foreign('subscriber_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
-
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 var menuIcon = document.querySelector(".menu-icon")
 var sidebar = document.querySelector(".sidebar")
 var container = document.querySelector(".container")
-var containerV = document.querySelector(".containerV")
+var containerp = document.querySelector(".containerP")
 var usericon = document.querySelector(".user-icon")
 var uploadicon = document.querySelector(".upload-icon")
 var overlay = document.querySelector(".overlay-card")
@@ -10,7 +10,7 @@ overlay.style.display = "none";
 menuIcon.onclick = function(){
     sidebar.classList.toggle("minimize");
     container.classList.toggle("Largecontainer");
-    containerV.classList.toggle("LargecontainerV");
+    containerp.classList.toggle("LargecontainerP");
 }
 
 function hideOverlay() {
@@ -20,5 +20,3 @@ function hideOverlay() {
 uploadicon.onclick = function(){
     overlay.style.display = "flex"; // Display the card
 }
-
-

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
@@ -19,4 +20,17 @@ class SearchController extends Controller
         ->get();
         return view("Searchpage",["Videos" => $videos , "creators" => $creators]);
     }
+
+    public function OpenChannel($id){
+        $channel = User::findOrFail($id);
+        // dd($channel);
+        $creatorlist = DB::table("users")->select("name","profile_picture")->where('id','=', $id)->get();
+        $creator=$creatorlist[0];
+        $videoList =  DB::table("contents")->
+                select("id","title",'user_id','path','thumbnail', 'description','duration','created_at')->
+                where('user_id','=',$id)->
+                get();
+
+        return view('channel',["channel" => $channel,"creator" => $creator , "videoList" => $videoList]);
+    } 
 }

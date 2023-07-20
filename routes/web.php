@@ -60,3 +60,6 @@ Route::get('/saves', [UserController::class, 'OpenSaved'])->middleware('auth')->
 
 //search videos/users
 Route::get("/Search",[SearchController::class,'Search']);
+
+Route::get('/profile/{id}', [SearchController::class, 'OpenChannel'])->name('profile');
+
