@@ -54,6 +54,7 @@
     <div class="container">
     @foreach ($videos as $video)
     @php
+    $videocreator = App\Models\User::find($video->user_id);
     $videoDate = Carbon\Carbon::parse($video->created_at);
     $timeDifference = $videoDate->diffForHumans();
     @endphp 
@@ -61,7 +62,7 @@
       <div class="vid-list">
         <a href="/video/{{$video->id}}"><img src="{{ $video->thumbnail}}" class="thumbnail"></a>
         <div class="flex-div">
-          <img src="{{ Auth::user()->profile_picture }}">
+          <a href="{{ route('profile', ['id' => $videocreator->id]) }}"><img src="{{ $videocreator->profile_picture }}"></a>
           <div class="vid-info">
             <a href="/video/{{$video->id}}">Title: {{$video->title}}</a>
             <p>Description: {{$video->description}}</p>

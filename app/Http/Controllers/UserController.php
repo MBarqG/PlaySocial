@@ -64,7 +64,7 @@ class UserController extends Controller
 
     public function OpenSaved(){
         $saved =  DB::table("likes")->select('content_id')->where("user_id", '=' ,auth()->id())->pluck('content_id');
-        $videos =  DB::table("contents")->select("id","title",'description','path','thumbnail','duration','created_at')->whereIn('id', $saved)->get();
+        $videos =  DB::table("contents")->select("id","user_id","title",'description','path','thumbnail','duration','created_at')->whereIn('id', $saved)->get();
         $FollowList = DB::table("Follows")->select("creator_id")->where('subscriber_id','=',auth()->id())->get();
         return view('savedvideos',['videos' => $videos , 'FollowList' => $FollowList]);
     }

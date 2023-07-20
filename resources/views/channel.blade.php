@@ -94,7 +94,7 @@
       <div class="vid-list">
         <a href="/video/{{$video->id}}"><img style="max-height: 500px" src="{{ asset($video->thumbnail)}}" class="thumbnail"></a>
         <div class="flex-div">
-          <img style="max-height: 35px" src="{{  asset($channel->profile_picture)}}">
+          <a href="{{ route('profile', ['id' => $channel->id]) }}"><img style="max-height: 35px" src="{{  asset($channel->profile_picture)}}"></a>
           <div class="vid-info">
             <a href="/video/{{$video->id}}">Title: {{$video->title}}</a>
             <p>Description: {{$video->description}}</p>
