@@ -5,9 +5,8 @@ var containerp = document.querySelector(".containerP")
 var usericon = document.querySelector(".user-icon")
 var uploadicon = document.querySelector(".upload-icon")
 var overlay = document.querySelector(".overlay-card")
-overlay.style.display = "none";
 
-menuIcon.onclick = function(){
+menuIcon.onclick = function () {
     sidebar.classList.toggle("minimize");
     container.classList.toggle("Largecontainer");
     containerp.classList.toggle("LargecontainerP");
@@ -17,6 +16,6 @@ function hideOverlay() {
     overlay.style.display = "none"; // Hide the card
 }
 
-uploadicon.onclick = function(){
+uploadicon.onclick = function () {
     overlay.style.display = "flex"; // Display the card
 }

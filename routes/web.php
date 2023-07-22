@@ -18,13 +18,13 @@ use App\Http\Controllers\VideoController;
 |
 */
 
-Route::get('/', [UserController::class,'open'])->name("WelcomePage");
+Route::get('/', [UserController::class, 'open'])->name("WelcomePage");
 
 // Sign up
-Route::get('/Signup',[UserController::class,'SignUp']);
+Route::get('/Signup', [UserController::class, 'SignUp']);
 
 // create user
-Route::post('/users',[UserController::class,'store']);
+Route::post('/users', [UserController::class, 'store']);
 
 // Login
 Route::get('/Login', [UserController::class, 'login'])->name('Login');
@@ -44,7 +44,7 @@ Route::get('/video/{id}', [VideoController::class, 'OpenContent']);
 
 
 //upload video
-Route::post("UploadVideo",[VideoController::class,'upload']);
+Route::post("UploadVideo", [VideoController::class, 'upload']);
 
 //add comment
 Route::post('{id}/addcomment', [VideoController::class, 'Postcomment']);
@@ -59,7 +59,7 @@ Route::post('{id}/unsave', [VideoController::class, 'unsaveVideo']);
 Route::get('/saves', [UserController::class, 'OpenSaved'])->middleware('auth')->name('Saved');
 
 //search videos/users
-Route::get("/Search",[SearchController::class,'Search']);
+Route::get("/Search", [SearchController::class, 'Search']);
 
 Route::get('/profile/{id}', [SearchController::class, 'OpenChannel'])->name('profile');
 

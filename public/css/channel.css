@@ -1,21 +1,25 @@
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: system-ui;
     box-sizing: border-box;
 }
-a{
+
+a {
     text-decoration: none;
     color: #5a5a5a;
 }
-img{
+
+img {
     cursor: pointer;
 }
-.flex-div{
+
+.flex-div {
     display: flex;
     align-items: center;
 }
-nav{
+
+nav {
     padding: 10px 2%;
     justify-content: space-between;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -24,41 +28,49 @@ nav{
     top: 0;
     z-index: 10;
 }
-hr{
+
+hr {
     border: 0;
     height: 1px;
     background-color: #dc3545;
     width: 100%;
 }
-.navEnd img{
+
+.navEnd img {
     width: 25px;
     margin-right: 25px;
 }
-.navEnd .user-icon{
+
+.navEnd .user-icon {
     width: 35px;
     border-radius: 50%;
     margin-right: 0;
 }
-.navStart .menu-icon{
+
+.navStart .menu-icon {
     width: 35px;
     margin-right: 25px;
 }
-.navStart .logo{
+
+.navStart .logo {
     width: 130px;
 }
-.navMid .Search-box{
+
+.navMid .Search-box {
     border: 1px solid #dc3545;
     margin-right: 15px;
     padding: 8px 12px;
     border-radius: 25px;
 }
-.navMid .Search-box input{
+
+.navMid .Search-box input {
     width: 400px;
     border: 0;
     outline: 0;
     background: transparent;
 }
-.navMid .Search-box img{
+
+.navMid .Search-box img {
     width: 15px;
 
 }
@@ -66,7 +78,7 @@ hr{
 
 
 /*------------------sidebar---------------*/
-.sidebar{
+.sidebar {
     background: #fff;
     width: 15%;
     height: 100vh;
@@ -76,127 +88,146 @@ hr{
     padding-top: 80px;
 }
 
-.shortcut-links a img{
+.shortcut-links a img {
     width: 30px;
     margin-right: 20px;
 }
-.shortcut-links a{
+
+.shortcut-links a {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
     width: fit-content;
     flex-wrap: wrap;
 }
-.sidebar hr{
+
+.sidebar hr {
     border: 0;
     height: 1px;
     background-color: #dc3545;
     width: 85%;
 }
-.following h3{
+
+.following h3 {
     font-size: 13px;
     margin: 20px 0;
     color: #5a5a5a;
 }
-.following a{
+
+.following a {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
     width: fit-content;
     flex-wrap: wrap;
 }
-.following a img{
+
+.following a img {
     width: 30px;
     height: 30px;
     border-radius: 50px;
     margin-right: 20px;
 }
 
-.minimize{
+.minimize {
     width: 5%;
 }
-.minimize a p{
+
+.minimize a p {
     display: none;
 }
-.minimize h3{
+
+.minimize h3 {
     display: none;
 }
-.minimize hr{
-   width: 50%;
-   margin-bottom: 25px;
+
+.minimize hr {
+    width: 50%;
+    margin-bottom: 25px;
 }
 
 
 /*----------------content------------------*/
 
-.container{
+.container {
     background: #ffffff;
     padding-left: 10%;
     padding-right: 2%;
     padding-top: 20px;
     padding-bottom: 20px;
 }
-.Largecontainer{
-    padding-left: 1%; 
+
+.Largecontainer {
+    padding-left: 1%;
 }
 
-.list-container{
+.list-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-column-gap: 16px;
     grid-row-gap: 30px;
     margin-top: 15px;
     flex-wrap: wrap;
 }
-.vid-list .thumbnail{
+
+.vid-list .thumbnail {
     width: 100%;
     border-radius: 5%;
 }
-.vid-list .flex-div{
+
+.vid-list .flex-div {
     align-items: flex-start;
     margin-top: 7px;
 }
-.vid-list .flex-div img{
+
+.vid-list .flex-div img {
     width: 35px;
     margin-right: 10px;
     border-radius: 50%;
 }
-.vid-info{
+
+.vid-info {
     color: #5a5a5a;
     font-size: 13px;
 }
-.vid-info a{
+
+.vid-info a {
     color: #000;
     font-weight: 600;
     display: block;
     margin-bottom: 5px;
 }
 
-.overlay-card .card-content hr{
+.overlay-card .card-content hr {
     border: 0;
     height: 1px;
     background-color: #dc3545;
     width: 100%;
 }
-.overlay-card .card-content form hr{
+
+.overlay-card .card-content form hr {
     border: 0;
     height: 1px;
     background-color: #dc3545;
     width: 100%;
 }
+
 /* Styling for the overlay card */
 .overlay-card {
-    display: none; /* Initially hide the card */
+    display: none;
+    /* Initially hide the card */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Ensure the card appears on top */
+    z-index: 9999;
+    /* Ensure the card appears on top */
 }
 
 .card-content {
@@ -205,11 +236,13 @@ hr{
     border-radius: 10%;
     border: 5px solid #dc3545;
 }
-.textarea_label{
-    display:block;
+
+.textarea_label {
+    display: block;
     align-items: top;
 }
-.large_text_box{
+
+.large_text_box {
     margin-left: 30px;
 }
 
@@ -219,62 +252,75 @@ hr{
 
 
 
-@media (max-width:900px){
-    .menu-icon{
+@media (max-width:900px) {
+    .menu-icon {
         display: none;
     }
-    .sidebar{
+
+    .sidebar {
         display: none;
     }
-    .container, .list-container{
+
+    .container,
+    .list-container {
         padding-left: 5%;
         padding-right: 5%;
     }
-    .navEnd .user-icon{
+
+    .navEnd .user-icon {
         display: block;
         width: 30px;
     }
-    .navMid .Search-box input{
-            width: 100px;
+
+    .navMid .Search-box input {
+        width: 100px;
     }
-    .logo{
+
+    .logo {
         width: 90px;
     }
-    .vid-list .thumbnail{
+
+    .vid-list .thumbnail {
         width: 100%;
     }
+
     .card-content {
         width: 100%;
     }
-    .large_text_box{
-        margin-right: 2px;
-        height: 4em;
-        width: 20em;
-    }
-}
-@media screen and (min-width: 100px) and (max-width: 900px) {
-    .large_text_box{
+
+    .large_text_box {
         margin-right: 2px;
         height: 4em;
         width: 20em;
     }
 }
 
-.hiddenbutton{
+@media screen and (min-width: 100px) and (max-width: 900px) {
+    .large_text_box {
+        margin-right: 2px;
+        height: 4em;
+        width: 20em;
+    }
+}
+
+.hiddenbutton {
     background: transparent;
     border: none;
 }
+
 .containerP {
     background: #ffffff;
     padding-left: 17%;
     padding-right: 2%;
     padding-top: 20px;
     padding-bottom: 50px;
-    display:block;
+    display: block;
 }
-.LargecontainerP{
-    padding-left: 7%; 
+
+.LargecontainerP {
+    padding-left: 7%;
 }
+
 .containerP .profile img {
     width: 100px;
     height: 100px;
@@ -296,7 +342,8 @@ hr{
 }
 
 .containerP .profile .user-info .following-count {
-    font-size: 14px; /* Adjust the font size as needed */
+    font-size: 14px;
+    /* Adjust the font size as needed */
 }
 
 .containerP .profile button {
