@@ -151,14 +151,14 @@ hr {
 
 .container {
     background: #ffffff;
-    padding-left: 14%;
+    padding-left: 10%;
     padding-right: 2%;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
 .Largecontainer {
-    padding-left: 4%;
+    padding-left: 1%;
 }
 
 .list-container {
@@ -245,8 +245,6 @@ hr {
 .large_text_box {
     margin-left: 30px;
 }
-
-
 @media (max-width:900px) {
     .menu-icon {
         display: none;
@@ -296,9 +294,6 @@ hr {
         height: 4em;
         width: 20em;
     }
-    .containerV{
-        padding: 0px 0px;
-    }
 }
 
 .hiddenbutton {
@@ -306,37 +301,28 @@ hr {
     border: none;
 }
 
-.containerV {
-    background: #ffffff;
-    margin: 0px 60px;
-    padding-left: 17%;
-    padding-right: 2%;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
+.drop-zone {
+    border: 1px solid #dc3545;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
 
-.LargecontainerV {
-    padding-left: 7%;
+.form-group input{
+    border: 1px solid #dc3545;
 }
-
-.vid-listC .profile_picture {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+.drop-zone img {
+    max-width: 100%;
+    max-height: 200px;
+    margin-top: 10px;
 }
-
-.flex-divC {
-    display: flex;
-    align-items: center;
+.Settings { 
+    margin-top: 2%;
+    margin-left: 38%;
 }
-
-.vid-listC {
-    height: 100px;
-    /* Set a fixed height for each channel list item */
+.title-column {
+    width: 150px;
 }
-
-.vid-listC .flex-divC {
-    justify-items: center;
-    align-items: flex-start;
-    margin-top: 7px;
+.Description-column {
+    width: 300px;
 }

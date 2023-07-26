@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Follows;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
@@ -25,21 +26,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $formfilds = $request->validate([
-            'name' => ['required', 'min:3'],
+            'name' => ['required', 'min:3','regex:/^[A-Za-z0-9\s]+$/'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => 'required|confirmed|min:8'
         ]);
-        $PP = $request->file("profile_picture");
-        if (!empty($PP)) {
-            $PP_name = time() . "." . $PP->getClientOriginalExtension();
-            $validation['filename'] = $PP_name;
-            $path = $PP->storeAs('profile_picture', $PP_name, 'public');
-            $formfilds['profile_picture'] = 'storage/' . $path;
-        } else {
-            $formfilds['profile_picture'] = 'images\default.png';
-        }
-
-
         //Hash Password
         $formfilds['password'] = bcrypt($formfilds['password']);
 
@@ -134,5 +124,47 @@ class UserController extends Controller
         } elseif (count($FollowedbyUser) == 0) {
             return [false, count($Followed)];
         }
+    }
+    //settings
+    //show settings page
+    public function settings()
+    {
+        $videos =  DB::table("contents")->select("id", "title", 'description', 'thumbnail')->where('user_id','=', auth()->id())->get();
+        $FollowList = DB::table("Follows")->select("creator_id")->where('subscriber_id', '=', auth()->id())->get();
+        return view('SettingsPage',['videos' => $videos, 'FollowList' => $FollowList]);
+    }
+    //update user info
+    public function updateUser(Request $request){
+        $user = User::find(auth()->id());
+        if(empty($request->get("name"))){
+            $name = $user->name;
+        }
+        else{
+            $name = $request->get("name"); 
+        }
+        if(empty($request->file("profile_picture"))){
+            $profile_picture = $user->profile_picture;
+        }
+        else{
+        $PP = $request->file("profile_picture");
+        $PP_name = time() . "." . $PP->getClientOriginalExtension();
+        $validation['filename'] = $PP_name;
+        $path = $PP->storeAs('profile_picture', $PP_name, 'public');
+        $profile_picture = 'storage/' . $path;
+        }
+        DB::table('users')->where('id','=',auth()->id())->update(['name'=> $name, "profile_picture" =>$profile_picture]);
+        return redirect()->route('Profile');
+    }
+
+    public function DeleteVideo(Request $request)
+    {
+        $videosToDelete = $request->input('videosToDelete');
+
+        if (!empty($videosToDelete)) {
+            DB::table('contents')->whereIn('id', $videosToDelete)->delete();
+        }
+
+        // Redirect back to the videos page or any other desired location.
+        return redirect()->back()->with('success', 'Selected videos deleted successfully.');
     }
 }

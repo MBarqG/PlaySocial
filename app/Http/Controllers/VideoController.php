@@ -14,8 +14,8 @@ class VideoController extends Controller
     public function upload(Request $request)
     {
         $videofilds = $request->validate([
-            'title' => ['required'],
-            'description' => ['required'],
+            'title' => ['required','regex:/^[A-Za-z0-9\s]+$/'],
+            'description' => ['required','regex:/^[A-Za-z0-9\s]+$/','max:2000'],
         ]);
         $vid = $request->file('path');
 
@@ -70,7 +70,7 @@ class VideoController extends Controller
     public function Postcomment(Request $request)
     {
         $commentfilds = $request->validate([
-            'comment_text' => ['required'],
+            'comment_text' => ['required','regex:/^[A-Za-z0-9\s]+$/', 'max:2000'],
             'content_id' => ['required']
         ]);
         $commentfilds['user_id'] = auth()->id();

@@ -43,6 +43,9 @@
             <a style="color: #dc3545;" href="/saves"><img src="{{ asset('images/save on.png') }}">
                 <p>Saved videos</p>
             </a>
+            <a href="/settings"><img src="{{asset('images/settings.png')}}">
+                <p>Settings</p>
+            </a>
             <a href="/Logout"><img src="{{ asset('images/Logout.png') }}">
                 <p>Logout</p>
             </a>
@@ -111,13 +114,15 @@
                 <br>
                 <br>
                 <label for="thumbnail" class="inline-block text-red mb-4">Video Thumbnail:</label>
-                <input type="file" class="border border-danger rounded" name="thumbnail" />
+                <input type="file" class="border border-danger rounded" name="thumbnail" accept="image/*" />
+
                 @error('thumbnail')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
                 <br>
                 <label for="path" class="inline-block text-red mb-4">Upload Video:</label>
-                <input type="file" class="border border-danger rounded" name="path" />
+                <input type="file" class="border border-danger rounded" name="path" accept="video/mp4, video/avi, video/quicktime, video/x-matroska" />
+
                 @error('path')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror

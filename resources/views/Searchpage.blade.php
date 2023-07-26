@@ -43,6 +43,9 @@
             <a href="/saves"><img src="{{ asset('images/save on.png') }}">
                 <p>Saved videos</p>
             </a>
+            <a href="/settings"><img src="{{asset('images/settings.png')}}">
+                <p>Settings</p>
+            </a>
             <a href="/Logout"><img src="{{ asset('images/Logout.png') }}">
                 <p>Logout</p>
             </a>
@@ -62,22 +65,23 @@
         </div>
     </div>
     {{-- --------------main videos------------- --}}
+   
     <div class="container">
         <h2>Channels:
             <hr>
         </h2>
-        @foreach ($creators as $creator)
             <div class="list-container">
+                @foreach ($creators as $creator)
                 <div class="vid-listC">
-                    {{-- <div class="profile-container"> --}}
+                    <div class="profile-container">
                     <a href="{{ route('profile', ['id' => $creator->id]) }}">
                         <img src="{{ $creator->profile_picture }}" class="profile_picture">
                     </a>
-                    @if ($creator->id != auth()->id())
-                        @php
+                         @php
                             $controller = new \App\Http\Controllers\UserController();
                             $followData = $controller->checkIfFollow($creator->id);
                         @endphp
+                    @if ($creator->id != auth()->id())
                         @if ($followData[0])
                             <form style="display: inline" method="POST"
                                 action="{{ url($creator->id . '/unFollow') }}">
@@ -94,17 +98,17 @@
                                 <button type="submit" class="btn btn-danger">Follow</button>
                             </form>
                         @endif
-                        <p class="creator-info">Name: {{ $creator->name }}, {{ $followData[1] }} Followers</p>
                     @endif
+                    <p class="creator-info">Name: {{ $creator->name }}, {{ $followData[1] }} Followers</p>
                 </div>
-                {{-- </div> --}}
-        @endforeach
-    </div>
-    </div>
+            </div>
+            @endforeach
+        </div>
     </div>
 
+
     {{-- --------------main videos------------- --}}
-    <div class="containerV">
+    <div class="container">
         <h2>Videos:
             <hr>
         </h2>
@@ -130,6 +134,7 @@
             @endforeach
         </div>
     </div>
+</div>
 
     <div style="display: none" class="overlay-card">
         <div class="card-content">
@@ -152,13 +157,15 @@
                 <br>
                 <br>
                 <label for="thumbnail" class="inline-block text-red mb-4">Video Thumbnail:</label>
-                <input type="file" class="border border-danger rounded" name="thumbnail" />
+                <input type="file" class="border border-danger rounded" name="thumbnail" accept="image/*" />
+
                 @error('thumbnail')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
                 <br>
                 <label for="path" class="inline-block text-red mb-4">Upload Video:</label>
-                <input type="file" class="border border-danger rounded" name="path" />
+                <input type="file" class="border border-danger rounded" name="path" accept="video/mp4, video/avi, video/quicktime, video/x-matroska" />
+
                 @error('path')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror

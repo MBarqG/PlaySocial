@@ -1,15 +1,16 @@
 var menuIcon = document.querySelector(".menu-icon")
 var sidebar = document.querySelector(".sidebar")
-var container = document.querySelector(".container")
-var containerV = document.querySelector(".containerV")
+var containers = document.querySelectorAll(".container")
 var usericon = document.querySelector(".user-icon")
 var uploadicon = document.querySelector(".upload-icon")
 var overlay = document.querySelector(".overlay-card")
 
 menuIcon.onclick = function () {
     sidebar.classList.toggle("minimize");
-    container.classList.toggle("Largecontainer");
-    containerV.classList.toggle("LargecontainerV");
+    containers.forEach(element => {
+        element.classList.toggle("Largecontainer");
+    });
+
 }
 
 function hideOverlay() {

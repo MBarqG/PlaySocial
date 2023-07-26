@@ -22,7 +22,7 @@
             <a class="nav-link" href="#About us">About us</a>
             <span>
                 <div id="signcontainer" class="container">
-                    <button type="button" class="btn btn-danger" onclick="location.href='/Log in'">Log in</button>
+                    <button type="button" class="btn btn-danger" onclick="location.href='/Login'">Log in</button>
                     <button type="button" class="btn btn-sm btn-outline-danger" onclick="location.href='/Signup'">Sign
                         up</button>
                 </div>

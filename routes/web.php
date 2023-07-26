@@ -27,7 +27,7 @@ Route::get('/Signup', [UserController::class, 'SignUp']);
 Route::post('/users', [UserController::class, 'store']);
 
 // Login
-Route::get('/Login', [UserController::class, 'login'])->name('Login');
+Route::get('/Login', [UserController::class, 'login'])->name('login');
 
 // Log In User
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
@@ -60,11 +60,20 @@ Route::get('/saves', [UserController::class, 'OpenSaved'])->middleware('auth')->
 
 //search videos/users
 Route::get("/Search", [SearchController::class, 'Search']);
+// open others pages
+Route::get('/profile/{id}', [SearchController::class, 'OpenChannel'])->middleware('auth')->name('profile');
 
-Route::get('/profile/{id}', [SearchController::class, 'OpenChannel'])->name('profile');
-
-
+// follow other users
 Route::post('{id}/Follow', [UserController::class, 'Follow']);
 
-//remove from saved list video
+//remove from follow list video
 Route::post('{id}/unFollow', [UserController::class, 'unFollow']);
+
+//settings page
+Route::get('/settings',[UserController::class, 'settings'])->middleware('auth')->name('Settings');
+
+//change user info
+Route::post("update", [UserController::class, 'updateUser']);
+//delete video
+
+Route::post("DeleteVideo",[UserController::class, 'DeleteVideo']);

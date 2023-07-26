@@ -8,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="images/mainicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css\channel.css') }}">
+    <link rel="stylesheet" href="{{ asset('css\settingsStyle.css') }}">
     <title>PlaySocial</title>
 </head>
 
@@ -21,7 +21,7 @@
         </div>
         <div class="navMid flex-div">
             <div class="Search-box flex-div">
-                <form method="GET" action="/Search">
+                <form method="GET" action="Search">
                     @csrf
                     <input autocomplete="off" type="text" placeholder="Search" name="text">
                     <button class="hiddenbutton" type="submit"><img
@@ -31,20 +31,19 @@
         </div>
         <div class="navEnd flex-div">
             <img src="{{ asset('images/upload.png') }}" class="upload-icon">
-            <img src="{{ asset(Auth::user()->profile_picture) }}" class="user-icon">
+            <img src="{{ Auth::user()->profile_picture }}" class="user-icon">
         </div>
     </nav>
-
     <!----------side bar------->
     <div class="sidebar">
         <div class="shortcut-links">
-            <a style="color: #dc3545" href="/Profile"><img src="{{ asset('images/mainicon.png') }}">
+            <a href="/Profile"><img src="{{ asset('images/mainicon.png') }}">
                 <p>Home</p>
             </a>
             <a href="/saves"><img src="{{ asset('images/save on.png') }}">
                 <p>Saved videos</p>
             </a>
-            <a href="/settings"><img src="{{asset('images/settings.png')}}">
+            <a style="color: #dc3545" href="/settings"><img src="{{asset('images/settings.png')}}">
                 <p>Settings</p>
             </a>
             <a href="/Logout"><img src="{{ asset('images/Logout.png') }}">
@@ -67,64 +66,75 @@
     </div>
 
     {{-- --------------main------------- --}}
-    <div class="containerP">
-        <div class="profile">
-            <img src="{{ asset($channel->profile_picture) }}">
-            <div class="user-info">
-                @php
-                    $controller = new \App\Http\Controllers\UserController();
-                    $followData = $controller->checkIfFollow($channel->id);
-                @endphp
-                <span class="user-name">{{ $channel->name }}</span>
-                <span class="following-count">{{ $followData[1] }} Followers</span>
-            </div>
-            @if ($channel->id != auth()->id())
-                <div class="follow-container">
-                    @if ($followData[0])
-                        <form method="POST" action="{{ url($channel->id . '/unFollow') }}">
-                            @csrf
-                            <input type="text" style="display: none" class="hideinput" value="{{ $channel->id }}"
-                                name="creator_id">
-                            <button type="submit" class="btn btn-outline-danger">Unfollow</button>
-                        </form>
-                    @else
-                        <form method="POST" action="{{ url($channel->id . '/Follow') }}">
-                            @csrf
-                            <input type="text" style="display: none" value="{{ $channel->id }}" name="creator_id">
-                            <button type="submit" class="btn btn-danger">Follow</button>
-                        </form>
-                    @endif
-            @endif
-        </div>
-    </div>
-    </div>
-    <br>
-
-    <div class="container">
-        <div class="list-container">
-            @foreach ($videoList as $video)
-                @php
-                    $videoDate = Carbon\Carbon::parse($video->created_at);
-                    $timeDifference = $videoDate->diffForHumans();
-                @endphp
-                <div class="vid-list">
-                    <a href="/video/{{ $video->id }}"><img style="max-height: 500px"
-                            src="{{ asset($video->thumbnail) }}" class="thumbnail"></a>
-                    <div class="flex-div">
-                        <a href="{{ route('profile', ['id' => $channel->id]) }}"><img style="max-height: 35px"
-                                src="{{ asset($channel->profile_picture) }}"></a>
-                        <div class="vid-info">
-                            <a href="/video/{{ $video->id }}">Title: {{ $video->title }}</a>
-                            <p>Description: {{ $video->description }}</p>
-                            <p>Upload: {{ $timeDifference }} </p>
-                            <p>Video Duration: {{ $video->duration }} Seconds</p>
-                        </div>
-                    </div>
+    <div class="container mt-5">
+        <h2>Channels Settings:
+            <hr>
+        </h2>
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <form method="POST" action="update" enctype="multipart/form-data">
+            @csrf
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name">
+              </div>
+              <div class="form-group">
+                <label for="profile-picture">Profile Picture</label>
+                <div class="drop-zone" id="drop-zone">
+                    <p>Drag and drop an image here or click to browse.</p>
+                    <label for="image-input" id="image-label">
+                        <img src="" alt="Upload" id="image-preview">
+                    </label>
+                    <input type="file" id="image-input" name="profile_picture" accept="image/*" style="display: none;">
                 </div>
-            @endforeach
+              </div>
+              <button type="submit" class="btn btn-outline-danger Settings">Save Settings</button>
+            </form>
+          </div>
         </div>
+        <hr>
+      </div>
+
+      {{-- --------------videos------------- --}}
+      <div class="container">
+        <h2>Videos Settings:
+            <hr>
+        </h2>
+        <form action="DeleteVideo" method="POST">
+            @csrf
+            <table class="table table-striped table-hover table-striped-red-white">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" class="title-column">Title</th>
+                        <th scope="col" class="Description-column">Description</th>
+                        <th scope="col"  >Thumbnail</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($videos as $video)
+                    <tr>
+                        <td>{{ $video->id }}</td>
+                        <td>{{ $video->title }}</td>
+                        <td>{{$video->description}}</td>
+                        <td>
+                            <img src="{{ $video->thumbnail }}" alt="Thumbnail" width="150" height="60">
+                        </td>
+                        <td>
+                            <input type="checkbox" name="videosToDelete[]" value="{{ $video->id }}">
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-danger Settings">Delete Selected Videos</button>
+        </form>
     </div>
 
+
+
+    {{-- --------------upload------------ --}}
     <div style="display: none" class="overlay-card">
         <div class="card-content">
             <h2>upload your Video</h2>
@@ -176,7 +186,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
         integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous">
     </script>
-    <script src="{{ asset('js\channel.js') }}"></script>
+    <script src="{{ asset('js\settings.js') }}"></script>
 </body>
 
 </html>
