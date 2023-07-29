@@ -142,6 +142,7 @@ class UserController extends Controller
         else{
             $name = $request->get("name"); 
         }
+        
         if(empty($request->file("profile_picture"))){
             $profile_picture = $user->profile_picture;
         }

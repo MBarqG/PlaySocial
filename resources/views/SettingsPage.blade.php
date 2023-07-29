@@ -80,12 +80,10 @@
               </div>
               <div class="form-group">
                 <label for="profile-picture">Profile Picture</label>
-                <div class="drop-zone" id="drop-zone">
-                    <p>Drag and drop an image here or click to browse.</p>
-                    <label for="image-input" id="image-label">
-                        <img src="" alt="Upload" id="image-preview">
-                    </label>
-                    <input type="file" id="image-input" name="profile_picture" accept="image/*" style="display: none;">
+                <div class="drop-zone" >
+                 <span class="drop-zone-label">Drop or Click to select Profile Picture</span>
+                 <div class="drop-zone-thumb" data-lable="myfile.txt"></div>
+                 <input type="file" name="profile_picture" class="drop-zone-input" accept="image/*">
                 </div>
               </div>
               <button type="submit" class="btn btn-outline-danger Settings">Save Settings</button>

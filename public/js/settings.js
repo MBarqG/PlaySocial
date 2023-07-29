@@ -11,50 +11,78 @@ menuIcon.onclick = function () {
 
 }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const dropZone = document.getElementById('drop-zone');
-      const imagePreview = document.getElementById('image-preview');
 
-      dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('active');
-      });
 
-      dropZone.addEventListener('dragleave', () => {
-        dropZone.classList.remove('active');
-      });
 
-      dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('active');
-        const file = e.dataTransfer.files[0];
-        const reader = new FileReader();
+document.querySelectorAll(".drop-zone-input").forEach((inputElement) => {
+	const dropZoneElement = inputElement.closest(".drop-zone");
 
-        reader.onload = () => {
-          imagePreview.src = reader.result;
-        };
+	dropZoneElement.addEventListener("click", (e) => {
+		inputElement.click();
+	});
 
-        if (file) {
-          reader.readAsDataURL(file);
-        }
-      });
+	inputElement.addEventListener("change", (e) => {
+		if (inputElement.files.length) {
+			updateThumbnail(dropZoneElement, inputElement.files[0]);
+		}
+	});
 
-      dropZone.addEventListener('click', () => {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'image/*';
-        input.onchange = (e) => {
-          const file = e.target.files[0];
-          const reader = new FileReader();
+	dropZoneElement.addEventListener("dragover", (e) => {
+		e.preventDefault();
+		dropZoneElement.classList.add("drop-zone-over");
+	});
 
-          reader.onload = () => {
-            imagePreview.src = reader.result;
-          };
+	["dragleave", "dragend"].forEach((type) => {
+		dropZoneElement.addEventListener(type, (e) => {
+			dropZoneElement.classList.remove("drop-zone-over");
+		});
+	});
 
-          if (file) {
-            reader.readAsDataURL(file);
-          }
-        };
-        input.click();
-      });
-    });
+	dropZoneElement.addEventListener("drop", (e) => {
+		e.preventDefault();
+
+		if (e.dataTransfer.files.length) {
+			inputElement.files = e.dataTransfer.files;
+			updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+		}
+
+		dropZoneElement.classList.remove("drop-zone-over");
+	});
+});
+
+/**
+ * Updates the thumbnail on a drop zone element.
+ *
+ * @param {HTMLElement} dropZoneElement
+ * @param {File} file
+ */
+function updateThumbnail(dropZoneElement, file) {
+	let thumbnailElement = dropZoneElement.querySelector(".drop-zone-thumb");
+
+	// First time - remove the label
+	if (dropZoneElement.querySelector(".drop-zone-label")) {
+		dropZoneElement.querySelector(".drop-zone-label").remove();
+	}
+
+	// First time - there is no thumbnail element, so lets create it
+	if (!thumbnailElement) {
+		thumbnailElement = document.createElement("div");
+		thumbnailElement.classList.add("drop-zone-thumb");
+		dropZoneElement.appendChild(thumbnailElement);
+	}
+
+	thumbnailElement.dataset.label = file.name;
+
+	// Show thumbnail for image files
+	if (file.type.startsWith("image/")) {
+		const reader = new FileReader();
+
+		reader.readAsDataURL(file);
+		reader.onload = () => {
+			thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+      thumbnailElement.style.height = '100%'
+		};
+	} else {
+		thumbnailElement.style.backgroundImage = null;
+	}
+}
