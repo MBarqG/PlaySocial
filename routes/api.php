@@ -21,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/Search-Videos-By-Name',[APIController::class,'videoSearchByName']);
 Route::get('/Search-Videos-By-Id',[APIController::class,'videoSearchById']);
+Route::get('/Get-users-Info-By-Name',[APIController::class,'usersByName']);
+Route::get('/Get-users-Info-By-Id',[APIController::class,'usersById']);
