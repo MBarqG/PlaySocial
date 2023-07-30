@@ -42,6 +42,7 @@ hr {
 }
 
 .navEnd .user-icon {
+    height: 35px;
     width: 35px;
     border-radius: 50%;
     margin-right: 0;
@@ -89,6 +90,7 @@ hr {
 }
 
 .shortcut-links a img {
+    height: 30px;
     width: 30px;
     margin-right: 20px;
 }
@@ -181,6 +183,7 @@ hr {
 }
 
 .vid-list .flex-div img {
+    height: 35px;
     width: 35px;
     margin-right: 10px;
     border-radius: 50%;

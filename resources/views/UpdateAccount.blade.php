@@ -21,11 +21,11 @@
                     <div class="row">
                         <div class="col text-center">
                             <a id="btn-1" class="btn btn-danger"
-                               href="#" onclick="showForm('option1')">Beginner plan</a>
+                                onclick="showForm('option1')">Beginner plan</a>
                         </div>
                         <div class="col text-center">
                             <a id="btn-2" class="btn btn-outline-danger" style="width: 150px"
-                               href="#" onclick="showForm('option2')">Professional plan</a>
+                                onclick="showForm('option2')">Professional plan</a>
                         </div>
                     </div>
                 </div>
@@ -94,27 +94,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function showForm(option) {
-            if (option === 'option1') {
-                document.getElementById('option1-form').style.display = 'block';
-                document.getElementById('option2-form').style.display = 'none';
-                document.getElementById('btn-1').classList.add("btn-danger");
-                document.getElementById('btn-1').classList.remove("btn-outline-danger");
-                document.getElementById('btn-2').classList.remove("btn-danger");
-                document.getElementById('btn-2').classList.add("btn-outline-danger");
-            } else if (option === 'option2') {
-                document.getElementById('option1-form').style.display = 'none';
-                document.getElementById('option2-form').style.display = 'block';
-                document.getElementById('btn-2').classList.add("btn-danger");
-                document.getElementById('btn-2').classList.remove("btn-outline-danger");
-                document.getElementById('btn-1').classList.remove("btn-danger");
-                document.getElementById('btn-1').classList.add("btn-outline-danger");
-            }
-        }
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
     </script>
@@ -124,6 +103,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
         integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous">
     </script>
+    <script src="{{ asset('js\update.js') }}"></script>
 </body>
 
 </html>

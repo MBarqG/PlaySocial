@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Input\Input;
 
 class UserController extends Controller
 {
@@ -173,9 +174,16 @@ class UserController extends Controller
         return view("UpdateAccount", ['selectedOption' => 'option1']);
     }
 
-
-
-
-
-
+    public function upgrade(Request $request){
+        $formFields = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required'
+        ]);
+        $sub = $request->input('subscription'); 
+        if (auth()->attempt($formFields)) {
+            $request->session()->regenerate();
+            DB::table('users')->where("email",'=', $formFields['email'])->update(['subscription'=> $sub]);
+            return redirect()->route('Profile');
+        }
+    }
 }

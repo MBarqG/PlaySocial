@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('password');
             $table->string('profile_picture')->nullable();
             $table->unsignedTinyInteger('subscription')->default(0);
-            $table->rememberToken();
             $table->timestamps();
         });
     }
