@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable()->useCurrent();
             $table->string('password');
             $table->string('profile_picture')->nullable();
+            $table->unsignedTinyInteger('subscription')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

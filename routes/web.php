@@ -35,7 +35,6 @@ Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 // Log Out
 Route::get('/Logout', [UserController::class, 'logout']);
 
-
 //profile page
 Route::get('/Profile', [UserController::class, 'OpenProfile'])->middleware('auth')->name('Profile');
 
@@ -74,6 +73,12 @@ Route::get('/settings',[UserController::class, 'settings'])->middleware('auth')-
 
 //change user info
 Route::post("update", [UserController::class, 'updateUser']);
-//delete video
 
+//delete video
 Route::post("DeleteVideo",[UserController::class, 'DeleteVideo']);
+
+//show upgrade
+Route::get('/upgradeAccount',[UserController::class, 'Showupgrade']);
+
+//upgrade
+Route::post("upgrade",[UserController::class, 'upgrade']);

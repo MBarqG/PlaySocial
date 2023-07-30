@@ -68,7 +68,7 @@
                         <hr>
                         <p class="card-text">not video time limit.<br>2000 videos max upload.<br>80 to 20 spilt in
                             monetization between creator and platform.</p>
-                        <a href="#" class="btn btn-light">Purchase Now</a>
+                        <a href="/upgradeAccount" class="btn btn-light">Purchase Now</a>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">4.99$ Pre Month</small>
@@ -77,13 +77,12 @@
             </div>
             <div class="col">
                 <div class="card text-center custom-rounded h-100">
-                    {{-- <img src="..." class="card-img-top" alt="..."> --}}
                     <div class="card-body text-white bg-danger custom-rounded-top">
                         <h5 class="card-title">professional plan</h5>
                         <hr>
                         <p class="card-text">not video time limit.<br>no videos upload limit.<br>90 to 10 spilt in
                             monetization between creator and platform.</p>
-                        <a href="#" class="btn btn-light">Purchase Now</a>
+                        <a href="/upgradeAccount" class="btn btn-light">Purchase Now</a>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">14.99$ Pre Month</small>

@@ -165,7 +165,17 @@ class UserController extends Controller
             DB::table('contents')->whereIn('id', $videosToDelete)->delete();
         }
 
-        // Redirect back to the videos page or any other desired location.
         return redirect()->back()->with('success', 'Selected videos deleted successfully.');
     }
+
+    // show upgrade account page
+    public function Showupgrade(){
+        return view("UpdateAccount", ['selectedOption' => 'option1']);
+    }
+
+
+
+
+
+
 }
