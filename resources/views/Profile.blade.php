@@ -13,58 +13,9 @@
 </head>
 
 <body>
-
-    <nav class="flex-div">
-        <div class="navStart flex-div">
-            <img src="{{ asset('images/menu.png') }}" class="menu-icon">
-            <a href="/Profile"><img src="{{ asset('images/logo.png') }}" class="logo"></a>
-        </div>
-        <div class="navMid flex-div">
-            <div class="Search-box flex-div">
-                <form method="GET" action="Search">
-                    @csrf
-                    <input autocomplete="off" type="text" placeholder="Search" name="text">
-                    <button class="hiddenbutton" type="submit"><img
-                            src="{{ asset('images/search-icon.png') }}"></button>
-                </form>
-            </div>
-        </div>
-        <div class="navEnd flex-div">
-            <img src="{{ asset('images/upload.png') }}" class="upload-icon">
-            <img src="{{ Auth::user()->profile_picture }}" class="user-icon">
-        </div>
-    </nav>
+@include('Layout.navigation')
     <!----------side bar------->
-    <div class="sidebar">
-        <div class="shortcut-links">
-            <a style="color: #dc3545" href="/Profile"><img src="{{ asset('images/mainicon.png') }}">
-                <p>Home</p>
-            </a>
-            <a href="/saves"><img src="{{ asset('images/save on.png') }}">
-                <p>Saved videos</p>
-            </a>
-            <a href="/settings"><img src="{{asset('images/settings.png')}}">
-                <p>Settings</p>
-            </a>
-            <a href="/Logout"><img src="{{ asset('images/Logout.png') }}">
-                <p>Logout</p>
-            </a>
-            <hr>
-        </div>
-        <div class="following">
-            <h3>Following</h3>
-            @foreach ($FollowList as $Follow)
-                @php
-                    $user = App\Models\User::find($Follow->creator_id);
-                @endphp
-                <a href="{{ route('profile', ['id' => $user->id]) }}"><img src="{{ asset($user->profile_picture) }}">
-                    <p>{{ $user->name }}</p>
-                </a>
-            @endforeach
-            <hr>
-        </div>
-    </div>
-
+    @include('Layout.sidebar')
     {{-- --------------main------------- --}}
     <div class="container">
         <div class="list-container">
@@ -88,48 +39,7 @@
             @endforeach
         </div>
     </div>
-
-    <div style="display: none" class="overlay-card">
-        <div class="card-content">
-            <h2>upload your Video</h2>
-            <hr>
-            <form method="POST" action="UploadVideo" enctype="multipart/form-data">
-                @csrf
-                <label for="title" class="inline-block text-red mb-4"> Video Title: </label>
-                <input type="text" class="border border-danger rounded" name="title" />
-                @error('title')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                @enderror
-                <br>
-                <label for="description" class="inline-block text-red mb-4 textarea_label"> Video Description: </label>
-                <textarea placeholder='Enter description...' rows="4" cols="48"
-                    class="border border-danger rounded large_text_box" name="description"></textarea>
-                @error('description')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                @enderror
-                <br>
-                <br>
-                <label for="thumbnail" class="inline-block text-red mb-4">Video Thumbnail:</label>
-                <input type="file" class="border border-danger rounded" name="thumbnail" accept="image/*" />
-
-                @error('thumbnail')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                @enderror
-                <br>
-                <label for="path" class="inline-block text-red mb-4">Upload Video:</label>
-                <input type="file" class="border border-danger rounded" name="path" accept="video/mp4, video/avi, video/quicktime, video/x-matroska" />
-
-                @error('path')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                @enderror
-                <br>
-                <button class="btn btn-outline-danger" type="submit">Upload</button>
-                <hr>
-            </form>
-            <button class="btn btn-danger" onclick="hideOverlay()">close</button>
-        </div>
-    </div>
-
+    @include("Layout.uploadcard")
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
